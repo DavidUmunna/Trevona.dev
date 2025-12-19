@@ -1,7 +1,7 @@
 import React from 'react';
 
-const whatsappNumber = '447700900123'; // placeholder UK mobile number
-const phoneNumberDisplay = '+44 7700 900123';
+const whatsappNumber = '+447541052535'; // placeholder UK mobile number
+const phoneNumberDisplay = '+447541052535';
 
 const industries = [
   {
@@ -21,12 +21,12 @@ const industries = [
 const demos = [
   {
     title: 'Barber Shop Demo',
-    link: 'https://demo.trevona.dev/barber', // placeholder live link
+    link: 'https://barbershopinit.netlify.app/', // placeholder live link
     notes: ['Mobile-friendly', 'Click-to-call', 'Google-ready'],
   },
   {
     title: 'Takeaway Demo',
-    link: 'https://demo.trevona.dev/takeaway', // placeholder live link
+    link: 'https://takeawayinit.netlify.app/', // placeholder live link
     notes: ['Mobile-friendly', 'Click-to-call', 'Google-ready'],
   },
 ];
