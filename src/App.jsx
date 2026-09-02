@@ -5,17 +5,24 @@ const phoneNumberDisplay = '+447541052535';
 
 const industries = [
   {
-    title: 'Barbers & salons',
-    detail: 'Show cuts, prices, and easy booking links so people call instead of scrolling past.',
+    title: 'Any business, local or online',
+    detail: 'From tradespeople to shops to startups - a clean, fast site that makes you look credible and easy to contact.',
   },
   {
-    title: 'Takeaways & cafes',
-    detail: 'Menus, opening hours, and click-to-call ordering for hungry locals.',
+    title: 'Bookings & reservations',
+    detail: 'Salons, restaurants, clinics, and more - add an AI assistant that handles enquiries and books appointments for you.',
   },
   {
-    title: 'Local service businesses',
-    detail: 'Clean service pages with quick contact so you win the local search.',
+    title: 'Personal brands & new ventures',
+    detail: 'Portfolios, freelancers, and side projects that need a simple site live fast.',
   },
+];
+
+const aiReservationFeatures = [
+  'Answers booking enquiries instantly, day or night',
+  'Confirms and reschedules appointments automatically',
+  'Sends reminders to cut down no-shows',
+  'Works over WhatsApp or a booking widget on your site',
 ];
 
 const demos = [
@@ -34,20 +41,23 @@ const demos = [
 const whatYouGet = [
   'Mobile-friendly website',
   'Click-to-call & WhatsApp buttons',
-  'Clear services or menu',
+  'Clear services, menu, or portfolio',
   'Google Maps & opening hours',
+  'Optional AI reservation & booking assistant',
   'Fast turnaround (5-7 days)',
 ];
 
 const pricingPoints = [
   'Starter website: GBP 250-500 (one-off)',
-  'No contracts. Optional maintenance.',
+  'AI Reservation Assistant: +GBP 40-80/month (optional add-on)',
+  'No contracts. Cancel the add-on anytime.',
   'Free preview available.',
 ];
 
 const highlights = [
   'Built for WhatsApp outreach & DMs',
   'Google-ready structure',
+  'Optional AI reservation assistant',
   'No long contracts, just results',
 ];
 
@@ -109,6 +119,9 @@ const App = () => {
           </div>
         </div>
         <div className="top-actions">
+          <a className="nav-link" href="#ai-reservations">
+            AI Booking
+          </a>
           <a className="nav-link" href="#pricing">
             Pricing
           </a>
@@ -124,11 +137,11 @@ const App = () => {
       <main>
         <section className="hero" id="top">
           <div className="hero-content">
-            <div className="eyebrow pill">Local-business friendly | Newcastle based</div>
-            <h1>Simple Websites That Help Local Newcastle Businesses Get More Customers</h1>
+            <div className="eyebrow pill">Newcastle-based | Websites for any business</div>
+            <h1>Simple Websites That Help Your Business Get More Customers</h1>
             <p className="lead">
-              trevona.dev builds fast, mobile-friendly websites for barbers, takeaways, and local services - no tech
-              stress, no long contracts.
+              trevona.dev builds fast, mobile-friendly websites for any business or brand - plus optional AI-powered
+              reservation management for businesses that take bookings. No tech stress, no long contracts.
             </p>
             <CTAButtons />
             <div className="hero-highlights">
@@ -169,8 +182,8 @@ const App = () => {
         <section className="section" id="who">
           <SectionHeader
             eyebrow="Who this is for"
-            title="Local businesses that need to be found and contacted fast."
-            copy="If customers search for your business on Google and can't easily find or contact you, trevona.dev can help."
+            title="Anyone who needs to be found and contacted fast."
+            copy="If people search for you on Google and can't easily find or contact you, trevona.dev can help - whatever you do."
           />
           <div className="card-grid">
             {industries.map((item) => (
@@ -187,7 +200,7 @@ const App = () => {
           <SectionHeader
             eyebrow="Demo websites"
             title="See exactly what customers will see on their phones."
-            copy="These demo websites show exactly what your business website could look like - fully customised to you."
+            copy="These demo websites show the kind of quality and structure you'll get - fully customised to you, whatever your business."
           />
           <div className="card-grid demos">
             {demos.map((demo) => (
@@ -223,6 +236,22 @@ const App = () => {
           </div>
         </section>
 
+        <section className="section" id="ai-reservations">
+          <SectionHeader
+            eyebrow="Add-on"
+            title="Let AI handle your bookings, 24/7."
+            copy="For businesses that take appointments or reservations - salons, restaurants, clinics, and more - add an AI assistant that manages enquiries, confirms bookings, and cuts down no-shows, right from WhatsApp or your website."
+          />
+          <div className="list-card">
+            <ul>
+              {aiReservationFeatures.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <CTAButtons primaryText="Ask about AI reservations" secondaryText="See pricing" />
+        </section>
+
         <section className="section" id="pricing">
           <SectionHeader eyebrow="Pricing" title="Transparent, one-off pricing." />
           <div className="pricing-card">
@@ -242,17 +271,18 @@ const App = () => {
         <section className="section" id="about">
           <SectionHeader
             eyebrow="About trevona.dev"
-            title="Local, practical web design for Newcastle businesses."
-            copy="trevona.dev helps local businesses look professional online and convert searches into real customers."
+            title="Newcastle-based, practical web design for any business."
+            copy="trevona.dev helps businesses of every kind look professional online and convert searches into real customers."
           />
           <div className="about-card">
             <p>
-              Based in Newcastle, trevona.dev focuses on simple, trustworthy sites that answer the questions customers
+              Based in Newcastle, trevona.dev builds simple, trustworthy sites that answer the questions people
               actually ask: what you do, when you're open, and how to contact you right now.
             </p>
             <p>
-              Fast setup, honest pricing, and sites tuned for WhatsApp, click-to-call, and Google Maps so you can close
-              more local customers without extra work.
+              Fast setup, honest pricing, and sites tuned for WhatsApp, click-to-call, and Google Maps - with an
+              optional AI reservation assistant for businesses that take bookings - so you can close more customers
+              without extra work.
             </p>
           </div>
         </section>
@@ -282,13 +312,13 @@ const App = () => {
                 </label>
                 <label>
                   Business
-                  <input name="business" type="text" placeholder="e.g. High Street Barbers" />
+                  <input name="business" type="text" placeholder="e.g. your business or brand name" />
                 </label>
                 <label>
                   What do you need?
                   <textarea
                     name="message"
-                    placeholder="Website for a barber shop with services, gallery, and opening hours."
+                    placeholder="Website for my business, plus AI reservation management if I take bookings."
                   />
                 </label>
                 <button className="btn primary full" type="submit">
@@ -302,7 +332,7 @@ const App = () => {
       </main>
 
       <footer className="footer">
-        <p>trevona.dev - Newcastle web design for local businesses.</p>
+        <p>trevona.dev - Newcastle-based web design and AI reservation management, for businesses everywhere.</p>
         <a href={whatsappLink} target="_blank" rel="noreferrer">
           Chat on WhatsApp
         </a>
