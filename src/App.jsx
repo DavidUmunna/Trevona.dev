@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logoMark from './assets/Trevonalogo.svg';
+import logoMark from './assets/logo2.svg';
 
 const phoneNumberDisplay = '+447541052535'; // placeholder UK mobile number
 
