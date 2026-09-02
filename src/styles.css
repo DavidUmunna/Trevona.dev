@@ -565,7 +565,7 @@ p {
   box-shadow: var(--card-shadow);
 }
 
-form {
+.form-card form {
   display: grid;
   gap: 14px;
 }
