@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import logoMark from './assets/Trevonalogo.svg';
 
 const phoneNumberDisplay = '+447541052535'; // placeholder UK mobile number
 
@@ -119,7 +120,7 @@ const App = () => {
     <div className="page">
       <header className="topbar">
         <div className="brand">
-          <div className="brand-mark">t</div>
+          <img className="brand-mark" src={logoMark} alt="trevona.dev logo" />
           <div>
             <span className="brand-name">trevona.dev</span>
             <p className="brand-tagline">Newcastle web design</p>
