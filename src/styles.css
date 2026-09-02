@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+/* Poppins is loaded via <link> + <link rel="preconnect"> in index.html for faster first paint */
 
 :root {
   --bg: #ffffff;

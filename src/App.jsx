@@ -123,7 +123,7 @@ const App = () => {
           <img className="brand-mark" src={logoMark} alt="trevona.dev logo" />
           <div>
             <span className="brand-name">trevona.dev</span>
-            <p className="brand-tagline">Newcastle web design</p>
+            <p className="brand-tagline">Web design & AI booking</p>
           </div>
         </div>
         <div className="top-actions">
@@ -145,7 +145,7 @@ const App = () => {
       <main>
         <section className="hero" id="top">
           <div className="hero-content">
-            <span className="eyebrow">Newcastle-based - Websites for any business</span>
+            <span className="eyebrow">Websites for any business, anywhere</span>
             <h1>Simple Websites That Help Your Business Get More Customers</h1>
             <p className="lead">
               trevona.dev builds fast, mobile-friendly websites for any business or brand - plus optional AI-powered
@@ -174,8 +174,8 @@ const App = () => {
               <h2>Why trevona.dev</h2>
               <div>
                 <p>
-                  Based in Newcastle, trevona.dev builds simple, trustworthy sites that answer the questions people
-                  actually ask: what you do, when you're open, and how to contact you right now.
+                  trevona.dev builds simple, trustworthy sites that answer the questions people actually ask: what
+                  you do, when you're open, and how to contact you right now.
                 </p>
                 <p style={{ marginTop: 14 }}>
                   Fast setup, honest pricing, and sites tuned for click-to-call, contact forms, and Google Maps - with
@@ -372,7 +372,7 @@ const App = () => {
       </main>
 
       <footer className="footer">
-        <p>trevona.dev - Newcastle-based web design and AI reservation management, for businesses everywhere.</p>
+        <p>trevona.dev - Web design and AI reservation management, for businesses everywhere.</p>
         <a href="#contact">Get in Touch</a>
       </footer>
     </div>
