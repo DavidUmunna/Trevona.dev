@@ -9,10 +9,22 @@
       content="trevona.dev builds simple, fast websites for any business, with optional AI-powered reservation management for salons, restaurants, clinics, and other booking-based businesses."
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <script type="module" crossorigin src="/assets/index-CuE1ucXy.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index--cDHddCV.css">
+    <script type="module" crossorigin src="/assets/index-D1N46GnJ.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BScCOTfN.css">
   </head>
   <body>
     <div id="root"></div>
+    <!--
+      Static shadow form so Netlify's build-time HTML parser can detect the "contact"
+      form. The real form is rendered by React in App.jsx and posts to Netlify at
+      runtime; this one is never shown or submitted. Field names must match exactly.
+    -->
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="text" name="business" />
+      <input type="text" name="contact" />
+      <textarea name="message"></textarea>
+      <input type="text" name="bot-field" />
+    </form>
   </body>
 </html>

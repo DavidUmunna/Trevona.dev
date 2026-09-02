@@ -12,6 +12,18 @@
   </head>
   <body>
     <div id="root"></div>
+    <!--
+      Static shadow form so Netlify's build-time HTML parser can detect the "contact"
+      form. The real form is rendered by React in App.jsx and posts to Netlify at
+      runtime; this one is never shown or submitted. Field names must match exactly.
+    -->
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="text" name="business" />
+      <input type="text" name="contact" />
+      <textarea name="message"></textarea>
+      <input type="text" name="bot-field" />
+    </form>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
