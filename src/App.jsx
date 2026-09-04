@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import logoMark from './assets/logo2.svg';
+import { trackEvent } from './analytics';
 
 const phoneNumberDisplay = '+447541052535'; // placeholder UK mobile number
 
@@ -43,11 +44,13 @@ const aiReservationFeatures = [
 
 const demos = [
   {
+    name: 'barbershop',
     title: 'Barber Shop Demo',
     link: 'https://barbershopinit.netlify.app/', // placeholder live link
     notes: ['Mobile-friendly', 'Click-to-call', 'Google-ready'],
   },
   {
+    name: 'takeaway',
     title: 'Takeaway Demo',
     link: 'https://takeawayinit.netlify.app/', // placeholder live link
     notes: ['Mobile-friendly', 'Click-to-call', 'Google-ready'],
@@ -76,17 +79,25 @@ const SectionHeader = ({ eyebrow, title, copy }) => (
   </div>
 );
 
-const CTAButtons = ({ primaryText = 'Get in Touch', secondaryText = 'View Demo Websites' }) => (
-  <div className="cta-group">
-    <a className="btn primary" href="#contact">
-      {primaryText}
-      <span className="arrow" aria-hidden="true" />
-    </a>
-    <a className="btn ghost" href="#demos">
-      {secondaryText}
-    </a>
-  </div>
-);
+const CTAButtons = ({ primaryText = 'Get in Touch', secondaryText = 'View Demo Websites', ctaLocation }) => {
+  const handlePrimaryClick = () => {
+    if (primaryText === 'Get in Touch') {
+      trackEvent('cta_click', { cta_location: ctaLocation });
+    }
+  };
+
+  return (
+    <div className="cta-group">
+      <a className="btn primary" href="#contact" onClick={handlePrimaryClick}>
+        {primaryText}
+        <span className="arrow" aria-hidden="true" />
+      </a>
+      <a className="btn ghost" href="#demos">
+        {secondaryText}
+      </a>
+    </div>
+  );
+};
 
 const FeatureBadge = ({ text }) => <span className="feature-badge">{text}</span>;
 
@@ -109,7 +120,11 @@ const App = () => {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encodeForNetlify(data),
     })
-      .then(() => {
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Form submission failed with status ${response.status}`);
+        }
+        trackEvent('contact_form_submit', { method: 'contact_form' });
         setFormStatus('sent');
         form.reset();
       })
@@ -123,7 +138,7 @@ const App = () => {
           <img className="brand-mark" src={logoMark} alt="trevona.dev logo" />
           <div>
             <span className="brand-name">trevona.dev</span>
-            <p className="brand-tagline">Web design & AI booking</p>
+            <p className="brand-tagline">More customers. Not just a website.</p>
           </div>
         </div>
         <div className="top-actions">
@@ -136,7 +151,11 @@ const App = () => {
           <a className="nav-link" href="#contact">
             Contact
           </a>
-          <a className="btn small primary" href="#contact">
+          <a
+            className="btn small primary"
+            href="#contact"
+            onClick={() => trackEvent('cta_click', { cta_location: 'nav' })}
+          >
             Get in Touch
           </a>
         </div>
@@ -151,7 +170,7 @@ const App = () => {
               trevona.dev builds fast, mobile-friendly websites for any business or brand - plus optional AI-powered
               reservation management for businesses that take bookings. No tech stress, no long contracts.
             </p>
-            <CTAButtons />
+            <CTAButtons ctaLocation="hero" />
             <div className="hero-highlights">
               {highlights.map((item) => (
                 <FeatureBadge key={item} text={item} />
@@ -264,7 +283,13 @@ const App = () => {
                       <p className="eyebrow">Live demo</p>
                       <h3>{demo.title}</h3>
                     </div>
-                    <a className="text-link" href={demo.link} target="_blank" rel="noreferrer">
+                    <a
+                      className="text-link"
+                      href={demo.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={() => trackEvent('demo_site_click', { demo_name: demo.name })}
+                    >
                       Open
                     </a>
                   </div>
@@ -308,7 +333,11 @@ const App = () => {
                 <div className="contact-card">
                   <p className="lead">Fill in the form and we'll get back to you fast.</p>
                   <div className="contact-actions">
-                    <a className="btn ghost" href={`tel:${phoneNumberDisplay.replace(/\s+/g, '')}`}>
+                    <a
+                      className="btn ghost"
+                      href={`tel:${phoneNumberDisplay.replace(/\s+/g, '')}`}
+                      onClick={() => trackEvent('call_button_click', { location: 'contact_section' })}
+                    >
                       Call {phoneNumberDisplay}
                     </a>
                   </div>
@@ -373,7 +402,9 @@ const App = () => {
 
       <footer className="footer">
         <p>trevona.dev - Web design and AI reservation management, for businesses everywhere.</p>
-        <a href="#contact">Get in Touch</a>
+        <a href="#contact" onClick={() => trackEvent('cta_click', { cta_location: 'footer' })}>
+          Get in Touch
+        </a>
       </footer>
     </div>
   );
