@@ -60,6 +60,7 @@ const demos = [
 const pricingPoints = [
   'Starter website: GBP 250-500 (one-off)',
   'AI Reservation Assistant: +GBP 40-80/month (optional add-on)',
+  'Post-launch maintenance: GBP 50 per request',
   'No contracts. Cancel the add-on anytime.',
   'Free preview available.',
 ];
@@ -134,13 +135,13 @@ const App = () => {
   return (
     <div className="page">
       <header className="topbar">
-        <div className="brand">
-          <img className="brand-mark" src={logoMark} alt="trevona.dev logo" />
+        <a className="brand" href="#top" aria-label="trevona.dev - back to home">
+          <img className="brand-mark" src={logoMark} alt="" />
           <div>
             <span className="brand-name">trevona.dev</span>
             <p className="brand-tagline">More customers. Not just a website.</p>
           </div>
-        </div>
+        </a>
         <div className="top-actions">
           <a className="nav-link" href="#ai-reservations">
             AI Booking
