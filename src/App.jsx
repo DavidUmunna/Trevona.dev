@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import logoMark from './assets/logo2.svg';
 import { trackEvent } from './analytics';
+import CommissionCalculator from './components/CommissionCalculator';
 
 const phoneNumberDisplay = '+447541052535'; // placeholder UK mobile number
 
@@ -264,8 +265,23 @@ const App = () => {
                   <li key={item}>{item}</li>
                 ))}
               </ul>
+              <p className="feature-row-note">
+                Industry data: businesses using AI-handled booking report around 75% fewer missed calls and 23% more
+                booked appointments on average.*
+              </p>
             </div>
             <CTAButtons primaryText="Ask about AI reservations" secondaryText="See pricing" />
+          </div>
+        </section>
+
+        <section id="commission-calculator" className="section">
+          <div className="inner">
+            <SectionHeader
+              eyebrow="Commission check"
+              title="See what your booking platform is actually costing you"
+              copy="Marketplace platforms take a cut of every booking, forever. See roughly what that adds up to over a year."
+            />
+            <CommissionCalculator />
           </div>
         </section>
 
@@ -310,16 +326,25 @@ const App = () => {
           <div className="inner">
             <SectionHeader eyebrow="Pricing" title="Transparent, one-off pricing." />
             <div className="pricing-panel">
-              <div>
-                <p className="price">GBP 250-500</p>
-                <p className="lead">Starter website | One-off payment</p>
+              <div className="pricing-grid">
+                <div>
+                  <p className="price">GBP 250-500</p>
+                  <p className="lead">Starter website | One-off payment</p>
+                </div>
+                <ul>
+                  {pricingPoints.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+                <CTAButtons primaryText="Get Started" secondaryText="See demos" />
               </div>
-              <ul>
-                {pricingPoints.map((point) => (
-                  <li key={point}>{point}</li>
-                ))}
-              </ul>
-              <CTAButtons primaryText="Get Started" secondaryText="See demos" />
+              <p className="lead">
+                No 3-month agency wait. No 20%+ commission on every booking. A free preview before you pay anything.
+              </p>
+              <p className="tiny">
+                *Industry-wide figures for AI phone/booking automation adoption, not a guarantee for any specific
+                business.
+              </p>
             </div>
           </div>
         </section>

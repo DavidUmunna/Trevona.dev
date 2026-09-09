@@ -483,6 +483,11 @@ p {
   gap: 20px;
 }
 
+.pricing-grid {
+  display: grid;
+  gap: 20px;
+}
+
 .price {
   font-size: 34px;
   font-weight: 800;
@@ -574,7 +579,8 @@ label {
 }
 
 input,
-textarea {
+textarea,
+select {
   width: 100%;
   padding: 13px 16px;
   border-radius: 10px;
@@ -592,7 +598,8 @@ textarea::placeholder {
 }
 
 input:focus,
-textarea:focus {
+textarea:focus,
+select:focus {
   outline: none;
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(0, 72, 255, 0.12);
@@ -601,6 +608,49 @@ textarea:focus {
 textarea {
   min-height: 120px;
   resize: vertical;
+}
+
+/* ---------- Commission calculator ---------- */
+
+.calculator-card {
+  display: grid;
+  gap: 24px;
+}
+
+.calculator-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.calculator-note {
+  margin-top: -4px;
+}
+
+.calculator-result {
+  background: var(--blue-tint);
+  border-radius: 16px;
+  padding: 20px;
+  display: grid;
+  gap: 10px;
+}
+
+.calculator-result .lead {
+  color: var(--strong);
+}
+
+.calculator-result strong {
+  color: var(--navy);
+}
+
+@media (min-width: 720px) {
+  .calculator-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+  }
+
+  .calculator-note {
+    grid-column: 1 / -1;
+  }
 }
 
 .hp-field {
@@ -700,10 +750,17 @@ textarea {
     padding: 40px 48px;
   }
 
+  .feature-row-note {
+    grid-column: 2;
+  }
+
   .pricing-panel {
+    padding: 48px 56px;
+  }
+
+  .pricing-grid {
     grid-template-columns: auto 1fr auto;
     align-items: center;
-    padding: 48px 56px;
   }
 
   .contact-panel {

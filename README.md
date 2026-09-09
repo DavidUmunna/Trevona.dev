@@ -9,7 +9,8 @@ appointments (salons, restaurants, clinics, etc).
 The site funnels visitors toward a contact form (Netlify Forms) rather than any
 outbound-only channel like WhatsApp - the goal is a direct, trackable lead, and the
 highest-intent actions on the page (form submits, CTA clicks, demo link clicks, call
-button clicks) are individually tracked in GA4 (see "Analytics" below).
+button clicks, calculator usage) are individually tracked in GA4 (see "Analytics"
+below).
 
 ## Stack
 
@@ -29,6 +30,8 @@ src/
   App.jsx             The entire site - all sections, copy, and the contact form
   analytics.js         trackEvent() helper - the only place code should call gtag()
   styles.css          Design tokens + all component styles
+  components/
+    CommissionCalculator.jsx   Marketplace-commission-vs-trevona.dev calculator (see below)
   assets/
     logo2.svg          Current logo (used in the nav)
     Trevonalogo.svg    Earlier logo variant, unused - safe to delete if unwanted
@@ -53,12 +56,28 @@ npm run preview   # preview the production build locally
 ## Sections (in `App.jsx`)
 
 Hero -> Why trevona.dev (capsule panel) -> Our Services (alternating service bands) ->
-What You Get / AI Reservations (feature rows) -> Demo websites -> Pricing -> Contact ->
-Footer.
+What You Get / AI Reservations (feature rows) -> Commission Calculator -> Demo websites
+-> Pricing -> Contact -> Footer.
 
 The visual design (color palette, pill buttons, capsule/stadium-shaped section
 backgrounds, illustration style) was adapted from a Figma community reference file,
 then reworked with trevona.dev's own copy and content.
+
+### Commission Calculator (`#commission-calculator`)
+
+`src/components/CommissionCalculator.jsx` - a small client-side tool comparing what
+marketplace booking platforms (Fresha 20%, Treatwell 42%, Booksy 30%, or a free-entry
+custom rate) would cost a business in commission per year against trevona.dev's flat
+one-off pricing. Pure client-side math (`clients * spend * rate% * 12`), no backend,
+nothing entered into it is stored or transmitted anywhere - not even into the analytics
+event (see below). Part of the "Blue Ocean" positioning work distinguishing trevona.dev
+from both agencies (slow, expensive) and commission-based marketplaces (cheap upfront,
+expensive forever).
+
+The `#pricing` section also carries a short objection-busting strap-line ("No 3-month
+agency wait. No 20%+ commission...") and `#ai-reservations` an industry-stat line about
+AI-handled booking outcomes, clearly labeled as general industry data rather than a
+trevona.dev-specific claim, with its disclaimer footnote in `#pricing`.
 
 ## Contact form -> Netlify Forms
 
@@ -95,19 +114,22 @@ guarded wrapper around `window.gtag('event', name, params)`. Every custom event 
 app goes through it rather than calling `gtag` directly, so the "is GA loaded yet"
 guard only has to live in one place.
 
-Four events are wired up in `App.jsx`, covering the highest-intent actions on the page:
+Five events are wired up in `App.jsx` and `CommissionCalculator.jsx`, covering the
+highest-intent actions on the page:
 
 | Event | Fires on | Params |
 |---|---|---|
 | `contact_form_submit` | Netlify form fetch resolving with `response.ok` (not on click - failed/pending submissions don't count) | `{ method: 'contact_form' }` |
-| `cta_click` | Any "Get in Touch" button/link (nav, hero, footer) | `{ cta_location: 'nav' \| 'hero' \| 'footer' }` |
+| `cta_click` | Any "Get in Touch" button/link (nav, hero, footer), or the calculator's "Get my free preview" | `{ cta_location: 'nav' \| 'hero' \| 'footer' \| 'commission_calculator' }` |
 | `demo_site_click` | Either outbound "Open" link in the Demo Websites section | `{ demo_name: 'barbershop' \| 'takeaway' }` |
 | `call_button_click` | The `tel:` link in the Contact section | `{ location: 'contact_section' }` |
+| `calculator_used` | First time a Commission Calculator input loses focus (fires once per page load) | `{ platform: 'fresha' \| 'treatwell' \| 'booksy' \| 'custom' }` |
 
-None of these carry user-entered form data (name, email, business, message) - they
-confirm *that* an action happened, not what was typed. Verified directly: submitting
-the form with real-looking values and inspecting every `gtag()` call made confirms no
-PII reaches the event params.
+None of these carry user-entered form data (name, email, business, message) or any
+calculator input (client count, spend, computed commission cost) - they confirm *that*
+an action happened, not what was typed or entered. Verified directly: submitting the
+contact form and using the calculator with real-looking values, then inspecting every
+`gtag()` call made, confirms no PII or calculator figures reach the event params.
 
 Note the `contact_form_submit` wiring also fixed a latent bug: the fetch handler
 previously treated any resolved response as success (Netlify Forms 404s don't reject
