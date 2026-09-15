@@ -43,6 +43,13 @@ const aiReservationFeatures = [
   'Works through a booking widget on your website',
 ];
 
+const aiPhoneAssistantFeatures = [
+  "Answers incoming calls 24/7, even when you're on a job or closed",
+  'Takes messages or books appointments by voice',
+  'Forwards urgent calls through to you live',
+  "Works alongside your website's AI Reservation Assistant - one covers your site, one covers your phone",
+];
+
 const demos = [
   {
     name: 'barbershop',
@@ -81,9 +88,14 @@ const SectionHeader = ({ eyebrow, title, copy }) => (
   </div>
 );
 
-const CTAButtons = ({ primaryText = 'Get in Touch', secondaryText = 'View Demo Websites', ctaLocation }) => {
+const CTAButtons = ({
+  primaryText = 'Get in Touch',
+  secondaryText = 'View Demo Websites',
+  secondaryHref = '#demos',
+  ctaLocation,
+}) => {
   const handlePrimaryClick = () => {
-    if (primaryText === 'Get in Touch') {
+    if (ctaLocation) {
       trackEvent('cta_click', { cta_location: ctaLocation });
     }
   };
@@ -94,7 +106,7 @@ const CTAButtons = ({ primaryText = 'Get in Touch', secondaryText = 'View Demo W
         {primaryText}
         <span className="arrow" aria-hidden="true" />
       </a>
-      <a className="btn ghost" href="#demos">
+      <a className="btn ghost" href={secondaryHref}>
         {secondaryText}
       </a>
     </div>
@@ -270,7 +282,31 @@ const App = () => {
                 booked appointments on average.*
               </p>
             </div>
-            <CTAButtons primaryText="Ask about AI reservations" secondaryText="See pricing" />
+            <CTAButtons primaryText="Ask about AI reservations" secondaryText="See pricing" secondaryHref="#pricing" />
+          </div>
+        </section>
+
+        <section className="section" id="ai-phone-assistant">
+          <div className="inner">
+            <SectionHeader
+              eyebrow="Add-on"
+              title="Never miss a call again."
+              copy="Most customers still pick up the phone before they fill in a form. The AI Phone Assistant answers your business calls day or night, takes a message or books the appointment, and forwards anything urgent straight through to you."
+            />
+            <div className="feature-row">
+              <h3>AI Phone Assistant</h3>
+              <ul>
+                {aiPhoneAssistantFeatures.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+            <CTAButtons
+              primaryText="Ask about the Phone Assistant"
+              secondaryText="See pricing"
+              secondaryHref="#pricing"
+              ctaLocation="ai_phone_assistant"
+            />
           </div>
         </section>
 
@@ -358,16 +394,10 @@ const App = () => {
               <div className="contact-grid">
                 <div className="contact-card">
                   <p className="lead">Fill in the form and we'll get back to you fast.</p>
-                  <div className="contact-actions">
-                    <a
-                      className="btn ghost"
-                      href={`tel:${phoneNumberDisplay.replace(/\s+/g, '')}`}
-                      onClick={() => trackEvent('call_button_click', { location: 'contact_section' })}
-                    >
-                      Call {phoneNumberDisplay}
-                    </a>
-                  </div>
-                  <p className="tiny">We can also share a quick, no-pressure preview of your site before you commit.</p>
+                  <p className="tiny">
+                    Prefer to talk? Use the call button in the corner. We can also share a quick, no-pressure preview
+                    of your site before you commit.
+                  </p>
                 </div>
                 <div className="form-card">
                   {formStatus === 'sent' ? (
@@ -432,6 +462,17 @@ const App = () => {
           Get in Touch
         </a>
       </footer>
+
+      <a
+        className="call-fab"
+        href={`tel:${phoneNumberDisplay.replace(/\s+/g, '')}`}
+        aria-label="Call us"
+        onClick={() => trackEvent('call_button_click', { location: 'floating_button' })}
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+        </svg>
+      </a>
     </div>
   );
 };
