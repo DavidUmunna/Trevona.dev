@@ -95,24 +95,27 @@ field list in that plugin to match, or Netlify won't register the new field.
 
 ## Analytics
 
-`index.html` loads **two** separate tracking setups:
+`index.html` loads **three** separate tracking setups:
 
 1. A direct `gtag.js` snippet for GA4 property **`G-381CQRLBZC`**.
 2. A **Google Tag Manager** container, **`GTM-MDKXZGMB`**.
+3. A direct **Meta Pixel** snippet (see "Meta Pixel" below) - **pending a real Pixel ID**,
+   not live yet.
 
-These are independent delivery paths. GTM currently has no GA4 tag configured inside
-it, so it forwards nothing to GA4 today. **All custom event tracking in this codebase
-goes through the direct `gtag.js` path only** (via `src/analytics.js`) - if a GA4
-Configuration tag is ever added inside the GTM container pointed at the same property,
-pageviews (and these custom events, if also wired there) would double-count. Don't add
-one without removing the direct snippet at the same time.
+(1) and (3) are independent delivery paths from GTM. GTM currently has no GA4 (or
+Meta) tag configured inside it, so it forwards nothing today. **All custom event
+tracking in this codebase goes through the direct snippets only** (via
+`src/analytics.js`) - if a GA4 Configuration tag or a Meta Pixel tag is ever added
+inside the GTM container pointed at the same property/pixel, events would
+double-count. Don't add one without removing the matching direct snippet at the same
+time.
 
-### Custom events
+### Custom events (GA4)
 
-`src/analytics.js` exports a single `trackEvent(name, params)` helper - a thin,
-guarded wrapper around `window.gtag('event', name, params)`. Every custom event in the
-app goes through it rather than calling `gtag` directly, so the "is GA loaded yet"
-guard only has to live in one place.
+`src/analytics.js` exports `trackEvent(name, params)` - a thin, guarded wrapper around
+`window.gtag('event', name, params)`. Every GA4 custom event in the app goes through it
+rather than calling `gtag` directly, so the "is GA loaded yet" guard only has to live
+in one place.
 
 Five events are wired up in `App.jsx` and `CommissionCalculator.jsx`, covering the
 highest-intent actions on the page:
@@ -122,7 +125,7 @@ highest-intent actions on the page:
 | `contact_form_submit` | Netlify form fetch resolving with `response.ok` (not on click - failed/pending submissions don't count) | `{ method: 'contact_form' }` |
 | `cta_click` | Any "Get in Touch" button/link (nav, hero, footer), or the calculator's "Get my free preview" | `{ cta_location: 'nav' \| 'hero' \| 'footer' \| 'commission_calculator' }` |
 | `demo_site_click` | Either outbound "Open" link in the Demo Websites section | `{ demo_name: 'barbershop' \| 'takeaway' }` |
-| `call_button_click` | The `tel:` link in the Contact section | `{ location: 'contact_section' }` |
+| `call_button_click` | The floating call button (bottom-right corner, every page) | `{ location: 'floating_button' }` |
 | `calculator_used` | First time a Commission Calculator input loses focus (fires once per page load) | `{ platform: 'fresha' \| 'treatwell' \| 'booksy' \| 'custom' }` |
 
 None of these carry user-entered form data (name, email, business, message) or any
@@ -142,6 +145,31 @@ GA4 property (GA4 Admin -> DebugView, or Realtime): mark `contact_form_submit` (
 optionally `call_button_click`) as a **Key event** in GA4 Admin -> Events. That's what
 lets Google/Meta Ads later optimize toward real leads instead of raw clicks - hold off
 on paid ad spend until Key events are confirmed live for a few days.
+
+### Meta Pixel - code ready, base snippet NOT yet added
+
+`src/analytics.js` also exports `trackMetaEvent(name, params, custom)` - the same
+guard pattern as `trackEvent`, wrapping `window.fbq('track', ...)` (standard events)
+or `window.fbq('trackCustom', ...)` (custom events, when `custom: true`). It's wired
+in alongside four of the five GA4 events above (`calculator_used` deliberately has no
+Meta counterpart - it's not a conversion signal):
+
+| Action | GA4 event | Meta event | Type |
+|---|---|---|---|
+| Contact form submits successfully | `contact_form_submit` | `Lead` | Standard |
+| Call button clicked | `call_button_click` | `Contact` | Standard |
+| "Get in Touch" CTA clicked | `cta_click` | `CTAClick` | Custom (`{ cta_location }`) |
+| Demo site link clicked | `demo_site_click` | `DemoSiteClick` | Custom (`{ demo_name }`) |
+
+**This is currently inert.** `index.html` does not yet have the Meta Pixel base code
+(`fbq` init + `PageView` snippet) - that requires a real Pixel ID from Meta Events
+Manager, which hasn't been provided. Without it, `window.fbq` is `undefined` and every
+`trackMetaEvent` call silently no-ops (verified: GA4 events fire normally, zero console
+errors, even with `fbq` missing entirely). Once a real Pixel ID exists, add the base
+snippet from Meta Events Manager to `index.html`'s `<head>` (same direct-snippet
+pattern as `gtag.js`, not via GTM) and everything above goes live with no other code
+changes needed - the event wiring is already correct and verified against a stubbed
+`fbq` (right event names, correct standard-vs-custom flag, no PII in any payload).
 
 ## SEO
 

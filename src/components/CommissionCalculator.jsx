@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { trackEvent } from '../analytics';
+import { trackEvent, trackMetaEvent } from '../analytics';
 
 const PLATFORM_RATES = {
   fresha: 20,
@@ -38,6 +38,7 @@ const CommissionCalculator = () => {
 
   const handleCtaClick = () => {
     trackEvent('cta_click', { cta_location: 'commission_calculator' });
+    trackMetaEvent('CTAClick', { cta_location: 'commission_calculator' }, true);
   };
 
   return (
