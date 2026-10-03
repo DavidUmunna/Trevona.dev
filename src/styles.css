@@ -696,6 +696,23 @@ textarea {
   font-weight: 600;
 }
 
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.footer-secondary-link {
+  font-weight: 500 !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-size: 0.9rem;
+}
+
+.footer-secondary-link:hover {
+  color: #fff !important;
+}
+
 /* ---------- Floating call button ---------- */
 
 .call-fab {

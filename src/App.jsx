@@ -466,15 +466,20 @@ const App = () => {
 
       <footer className="footer">
         <p>trevona.dev - Web design and AI reservation management, for businesses everywhere.</p>
-        <a
-          href="#contact"
-          onClick={() => {
-            trackEvent('cta_click', { cta_location: 'footer' });
-            trackMetaEvent('CTAClick', { cta_location: 'footer' }, true);
-          }}
-        >
-          Get in Touch
-        </a>
+        <div className="footer-links">
+          <a
+            href="#contact"
+            onClick={() => {
+              trackEvent('cta_click', { cta_location: 'footer' });
+              trackMetaEvent('CTAClick', { cta_location: 'footer' }, true);
+            }}
+          >
+            Get in Touch
+          </a>
+          <a href="/privacy-policy.html" className="footer-secondary-link">
+            Privacy Policy
+          </a>
+        </div>
       </footer>
 
       <a
