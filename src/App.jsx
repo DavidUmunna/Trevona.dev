@@ -154,7 +154,7 @@ const App = () => {
           <img className="brand-mark" src={logoMark} alt="" />
           <div>
             <span className="brand-name">trevona.dev</span>
-            <p className="brand-tagline">More customers. Not just a website.</p>
+            <p className="brand-tagline">A Digital Ecosystem Built to Grow Your Business</p>
           </div>
         </a>
         <div className="top-actions">
@@ -184,10 +184,11 @@ const App = () => {
         <section className="hero" id="top">
           <div className="hero-content">
             <span className="eyebrow">Websites for any business, anywhere</span>
-            <h1>Simple Websites That Help Your Business Get More Customers</h1>
+            <h1>A Digital Ecosystem Built to Grow Your Business</h1>
             <p className="lead">
-              trevona.dev builds fast, mobile-friendly websites for any business or brand - plus optional AI-powered
-              reservation management for businesses that take bookings. No tech stress, no long contracts.
+              trevona.dev builds fast, mobile-friendly web applications connected to automations and an AI phone
+              assistant that catches every enquiry - so you capture more of your market instead of losing it to a
+              missed call. No tech stress, no long contracts.
             </p>
             <CTAButtons ctaLocation="hero" />
             <div className="hero-highlights">
@@ -212,13 +213,15 @@ const App = () => {
               <h2>Why trevona.dev</h2>
               <div>
                 <p>
-                  trevona.dev builds simple, trustworthy sites that answer the questions people actually ask: what
-                  you do, when you're open, and how to contact you right now.
+                  Most website companies stop at the website. trevona.dev builds your whole digital ecosystem, a
+                  site that converts, automations that follow up before a lead goes cold, and an AI phone assistant
+                  that makes sure no call ever goes unanswered, so more of your market finds you and actually gets
+                  in touch.
                 </p>
                 <p style={{ marginTop: 14 }}>
-                  Fast setup, honest pricing, and sites tuned for click-to-call, contact forms, and Google Maps - with
-                  an optional AI reservation assistant for businesses that take bookings - so you can close more
-                  customers without extra work.
+                  And if you already have a website, that's not the finish line. A site that just sits there isn't
+                  the same as one that's working for you, if it isn't connected to the rest of your business,
+                  you're still leaving leads, and money, on the table. That's where we come in.
                 </p>
               </div>
             </div>
