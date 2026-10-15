@@ -183,7 +183,6 @@ const App = () => {
       <main>
         <section className="hero" id="top">
           <div className="hero-content">
-            <span className="eyebrow">Websites for any business, anywhere</span>
             <h1>A Digital Ecosystem Built to Grow Your Business</h1>
             <p className="lead">
               trevona.dev builds fast, mobile-friendly web applications connected to automations and an AI phone
