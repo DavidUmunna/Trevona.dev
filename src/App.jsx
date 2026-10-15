@@ -3,7 +3,7 @@ import logoMark from './assets/logo2.svg';
 import { trackEvent, trackMetaEvent } from './analytics';
 import CommissionCalculator from './components/CommissionCalculator';
 
-const phoneNumberDisplay = '+447541052535'; // placeholder UK mobile number
+const phoneNumberDisplay = '+442046205384'; // Trevona business line (Telnyx, Charlie AI assistant handles missed calls)
 
 const serviceBands = [
   {
@@ -468,9 +468,56 @@ const App = () => {
       </main>
 
       <footer className="footer">
-        <p>trevona.dev - Web design and AI reservation management, for businesses everywhere.</p>
-        <div className="footer-links">
+        <div className="footer-grid">
+          <div className="footer-col footer-brand">
+            <div className="footer-brand-row">
+              <img className="footer-logo" src={logoMark} alt="" />
+              <span className="footer-brand-name">trevona.dev</span>
+            </div>
+            <p>
+              trevona.dev builds your whole digital ecosystem - a site that converts, automations that follow up,
+              and an AI phone assistant that makes sure no call goes unanswered.
+            </p>
+          </div>
+
+          <div className="footer-col">
+            <h3>Quick Links</h3>
+            <ul>
+              <li>
+                <a href="#top">Home</a>
+              </li>
+              <li>
+                <a href="#ai-reservations">AI Booking</a>
+              </li>
+              <li>
+                <a href="#demos">Demos</a>
+              </li>
+              <li>
+                <a href="#pricing">Pricing</a>
+              </li>
+              <li>
+                <a href="#contact">Contact</a>
+              </li>
+            </ul>
+          </div>
+
+          <div className="footer-col">
+            <h3>Legal</h3>
+            <ul>
+              <li>
+                <a href="/privacy-policy.html">Privacy Policy</a>
+              </li>
+              <li>
+                <a href="/terms-and-conditions.html">Terms &amp; Conditions</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="footer-bottom">
+          <p>&copy; {new Date().getFullYear()} trevona.dev. All rights reserved.</p>
           <a
+            className="footer-cta"
             href="#contact"
             onClick={() => {
               trackEvent('cta_click', { cta_location: 'footer' });
@@ -478,9 +525,6 @@ const App = () => {
             }}
           >
             Get in Touch
-          </a>
-          <a href="/privacy-policy.html" className="footer-secondary-link">
-            Privacy Policy
           </a>
         </div>
       </footer>

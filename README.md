@@ -188,7 +188,7 @@ differs, these need updating or search engines/social crawlers will index the wr
 
 These are stand-ins, not real business details - replace before going live:
 
-- `phoneNumberDisplay` in `App.jsx` (`+447541052535`) - used for the `tel:` link.
+- `phoneNumberDisplay` in `App.jsx` is now the real business line (`+442046205384`, a Telnyx number; the Charlie Vapi assistant answers missed calls). No longer a placeholder.
 - The two demo site links in `App.jsx` (`barbershopinit.netlify.app`,
   `takeawayinit.netlify.app`) - marked as placeholder live links in the source.
 - Pricing figures (`GBP 250-500`, AI add-on `+GBP 40-80/month`) are illustrative, not
